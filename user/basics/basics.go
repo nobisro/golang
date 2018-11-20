@@ -72,6 +72,19 @@ func changeXVal(x *int) {
 	*x = 2
 }
 
+//Define a struct with the following attributes
+type Rectangle struct {
+	leftX float64
+	topY float64
+	height float64
+	width float64
+}
+
+//Add a method called area onto the struct which returns a float
+func (rect1 *Rectangle) area() float64 {
+	return rect1.width * rect1.height
+}
+
 
 // Function main serves as entry point for binary executable
 func main() {
@@ -85,6 +98,11 @@ func main() {
 	fmt.Println("x = ", x)
 	changeXVal(&x)
 	fmt.Println("x = ", x)
+	rect1 := Rectangle{leftX: 0, topY: 50, height: 10, width: 20}
+	rect2 := Rectangle{0, 50, 10, 20}
+	fmt.Println("Rectangle is ", rect1.width, "wide")
+	fmt.Println("Rectangle2 is ", rect2.height, "tall")
+	fmt.Println("Area of Rectangle is: ", rect1.area())
 }
 
 
