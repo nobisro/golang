@@ -67,7 +67,10 @@ func panicTwo(i int) {
 	panicTwo(i + 1)
 }
 
-
+// Passing in the star means that we're passing in the pointer to the place in memory, and not the value stored there.
+func changeXVal(x *int) {
+	*x = 2
+}
 
 
 // Function main serves as entry point for binary executable
@@ -78,6 +81,10 @@ func main() {
 	fmt.Println(safeDivision(5, 0))
 	fmt.Println(safeDivision(6, 3))
 	panicOne()
+	x := 0
+	fmt.Println("x = ", x)
+	changeXVal(&x)
+	fmt.Println("x = ", x)
 }
 
 
