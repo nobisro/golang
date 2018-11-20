@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 )
 
 // Iimplement a while loop to calculate the square root of an input number, using Newton's method.
@@ -22,7 +23,7 @@ func Sqrt(x float64) float64 {
 }
 
 
-// Return two values from a single function
+// Return multiple values from a single function
 func returnMultipleValues(num int) (int, int, int) {
 	return num+1, num+2, num+3
 }
@@ -67,8 +68,41 @@ func panicTwo(i int) {
 	panicTwo(i + 1)
 }
 
+// Passing in the star means that we're passing in the pointer to the place in memory, and not the value stored there.
+func changeXVal(x *int) {
+	*x = 2
+}
 
+//Define a struct with the following attributes
+type Rectangle struct {
+	leftX float64
+	topY float64
+	height float64
+	width float64
+}
 
+//Add a method called area onto the struct which returns a float
+func (rect1 *Rectangle) area() float64 {
+	return rect1.width * rect1.height
+}
+
+//Define an interface. Interfaces are named collections of method signatures
+
+type Shape interface {
+	area() float64
+}
+
+type Circle struct {
+	radius float64
+}
+
+func (c Circle) area() float64 {
+	return math.Pi * math.Pow(c.radius, 2)
+}
+
+func getArea(shape Shape) float64 {
+	return shape.area()
+}
 
 // Function main serves as entry point for binary executable
 func main() {
@@ -78,6 +112,17 @@ func main() {
 	fmt.Println(safeDivision(5, 0))
 	fmt.Println(safeDivision(6, 3))
 	panicOne()
+	x := 0
+	fmt.Println("x = ", x)
+	changeXVal(&x)
+	fmt.Println("x = ", x)
+	rect1 := Rectangle{leftX: 0, topY: 50, height: 10, width: 20}
+	rect2 := Rectangle{0, 50, 10, 20}
+	fmt.Println("Rectangle is ", rect1.width, "wide")
+	fmt.Println("Rectangle2 is ", rect2.height, "tall")
+	fmt.Println("Area of Rectangle is: ", rect1.area())
+	circ := Circle{5}
+	fmt.Println("Cirlce area = ", getArea(circ))
 }
 
 
