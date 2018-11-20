@@ -45,6 +45,28 @@ func safeDivision(x, y int) int {
 	return solution
 }
 
+// Function panicTwo takes in the int i and panics if i is greater than 3, otherwise it calls itself with an incremented argument. Panic stops the ordinary flow of control, whereas recover resumes control of a panicking goroutine.
+func panicOne() {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("Recovered in f", r)
+		}
+	}()
+	fmt.Println("Calling  panicTwo...")
+	panicTwo(0)
+	fmt.Println("Returned normally from panicTwo")
+}
+
+func panicTwo(i int) {
+	if i > 3 {
+		fmt.Println("Panicking!")
+		panic(fmt.Sprintf("%v", i))
+	}
+	defer fmt.Println("Defer in panicTwo", i)
+	fmt.Println("Printing panicTwo", i)
+	panicTwo(i + 1)
+}
+
 
 
 
@@ -55,6 +77,7 @@ func main() {
 	fmt.Println(factorial(5)) // 120
 	fmt.Println(safeDivision(5, 0))
 	fmt.Println(safeDivision(6, 3))
+	panicOne()
 }
 
 
